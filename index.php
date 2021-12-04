@@ -8,11 +8,15 @@
 </head>
 <body>
 
-<form action="" method="POST">
-    <!-- <input type="file" id="inputGambar" name="inputGambar"accept="image/png, image/jpeg"> -->
-    
-    <input type="submit" name="insert" value="Submit">
-</form>
+<div style="margin: auto; width: 50%">
+	<form action="" method="POST">
+		<img id="gambar" src="Placeholder.png" style="display:block; margin: auto; width: 500px; height: 500px;">
+		<br/>
+	    <input type="file" id="inputGambar" name="inputGambar"accept="image/png, image/jpeg" onchange="document.getElementById('gambar').src = window.URL.createObjectURL(this.files[0])"> 
+	    <br/><br/>
+	    <input type="submit" name="insert" value="Submit">
+	</form>
+</div>
 <?php
     if (isset($_POST['insert'])) {
         $command = escapeshellcmd('python test.py');
