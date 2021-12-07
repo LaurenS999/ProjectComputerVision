@@ -9,7 +9,7 @@
 <body>
 
 <div style="margin: auto; width: 50%">
-	<form action="" method="POST">
+	<form action="" method="POST" enctype="multipart/form-data">
 		<img id="gambar" src="Placeholder.png" style="display:block; margin: auto; width: 500px; height: 500px;">
 		<br/>
 	    <input type="file" id="inputGambar" name="inputGambar"accept="image/png, image/jpeg" onchange="document.getElementById('gambar').src = window.URL.createObjectURL(this.files[0])"> 
@@ -19,9 +19,14 @@
 </div>
 <?php
     if (isset($_POST['insert'])) {
-        $command = escapeshellcmd('python test.py');
+        
+        $lampiran = basename("upload.jpg");
+
+        move_uploaded_file($_FILES['inputGambar']['tmp_name'], $lampiran);
+
+        $command = escapeshellcmd('python Detect.py');
         $output = shell_exec($command);
-        echo '<img src="test/waka.jpg">';
+        echo '<img src="savedImage.jpg" style="display:block; margin: auto; width: 500px; height: 500px;">';
     }
 ?>
 
